@@ -8,7 +8,7 @@ class personas_model{
         $this->db = $con::conexion();
     }
     public function get_personas(){
-        $consulta=$this->db->query("select * from personas;");
+        $consulta=$this->db->query("select * from comunidades;");
         $this->personas = $consulta->fetch_all(MYSQLI_ASSOC);
 
         /*while($filas=$consulta->fetch_assoc()){

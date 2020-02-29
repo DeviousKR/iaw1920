@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+  <title>Login</title>
+  <style>
+  body {
+    background-color: #000000;
+    font-family:"Trebuchet MS", Helvetica, sans-serif'
+  }
+  </style>
+</head>
+<body>
+  <div class="container" style="margin-top:1vh">
+    <div class="jumbotron mt-4 bg-secondary text-white text-center">
+      <h1 class="display-5 text-center font-weight-bold">Welcome back, log in with your account!</h1>
+            <p class="lead mt-4">If you dont have one, you can register **HERE**</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="jumbotron mt-4 bg-secondary text-white text-center">
+      <form action="login_v" method="POST" class="text-center">
+        <p class="h3 mb-4">Please fill the formulary below:</p>
+        <p class="mb-4">All the fields are compulsory</p>
+        <label for="username">Userame:</label>
+        <input type="text" id="username" name="username" required class="form-control mb-4" placeholder="Username">
+        <label for="username">Password:</label>
+        <input type="password" id="password" name="password" required class="form-control mb-4" placeholder="Password">
+        <button class="btn btn-success btn-lrg" type="submit">Log in!</button>
+      </form>
+    </div>
+  </div>
+  <!-- Default form subscription -->
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="bower_components/popper.js/dist/popper.min.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

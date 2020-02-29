@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Population Analyzer</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #000000;
+        font-family:"Trebuchet MS", Helvetica, sans-serif'
+      }
+    </style>
+
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron text-center bg-secondary mt-5">
+        <h1 class="display-4">Select your desired location</h1>
+        <p class="h5 mb-5">Use the desplegable below</p>
+        <form action="provincias" method="POST" class="text-center">
+            <label for="l1">Location:</label>
+            <select name="com" class="form-control" id="l1">
+                <?=$dispQ?>
+            </select>
+            <br>
+          <button class="btn btn-success btn-lg" type="submit">Procced!</button>
+        </form>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/popper.js/dist/popper.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
