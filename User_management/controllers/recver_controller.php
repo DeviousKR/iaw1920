@@ -38,7 +38,7 @@ $date = new DateTime($verification_date);
 $date = $date->modify('-1 hour');
 $check_date = $date->format('Y-m-d H:i:s');
 
-
+//verifiying that the time is less than 1 hour before the registry
 if ($creation_date >= $check_date) {
   $verify_user = new validateuser();
   $v_error = $verify_user->verifiy_user($username);
