@@ -42,6 +42,7 @@ $check_date = $date->format('Y-m-d H:i:s');
 if ($creation_date >= $check_date) {
   $verify_user = new validateuser();
   $v_error = $verify_user->verifiy_user($username);
+  header("location:landing");
 } else {
   header("location:resend_verification");
   exit;

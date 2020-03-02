@@ -29,9 +29,11 @@
         <p class="h3 mb-4">Please fill the formulary below:</p>
         <p class="mb-4">All the fields are compulsory</p>
         <label for="username">Userame:</label>
-        <input type="text" id="username" name="username" required class="form-control mb-4" placeholder="Username">
+        <input type="text" id="username" name="username" required class="form-control mb-4 <?=$val_n?>" placeholder="Username">
+        <p class="text-center text-dark font-weight-bold mt-2"><?=$w_name?><p>
         <label for="username">Password:</label>
-        <input type="password" id="password" name="password" required class="form-control mb-4" placeholder="Password">
+        <input type="password" id="password" name="password" required class="form-control mb-4 <?=$val_p?>" placeholder="Password">
+        <p class="text-center text-dark font-weight-bold mt-2"><?=$w_pass?><p>
         <button class="btn btn-success btn-lrg" type="submit">Log in!</button>
       </form>
     </div>

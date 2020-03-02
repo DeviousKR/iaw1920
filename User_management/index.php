@@ -22,7 +22,6 @@ switch ($request) {
     case 'login' :
         require __DIR__ . '/controllers/loginq_controller.php';
         break;
-    //controlador despúes del login (a borrar)
     case 'login_v' :
       require __DIR__ . '/controllers/logsucc_controller.php';
       break;
@@ -36,6 +35,9 @@ switch ($request) {
       break;
     case 'register_confirmed' :
       require __DIR__ . '/controllers/recver_controller.php';
+      break;
+    case 'resend_verification' :
+      require __DIR__ . '/controllers/resendver_controller.php';
       break;
     default:
         http_response_code(404);
