@@ -132,7 +132,7 @@ function sendMail($user,$email,$pwd_hash,$ver_hash) {
 
 
 function mailBody($user, $email, $pwd_hash,$ver_hash) {
-	$href = 'localhost/iaw1920/User_management/register_confirmed'.'?username='.base64_encode($user).'&challenge='.$ver_hash;
+	$href = '172.16.10.11/iaw1920/User_management/register_confirmed'.'?username='.base64_encode($user).'&challenge='.$ver_hash;
 	// Debug
 	// file_put_contents('./debug/mail.css', $styles);
 	// End Debug
@@ -183,6 +183,7 @@ if ($mail) {
     header("location:register");
     exit;
   }
+  header("location:mail_sent");
 } else {
   $_SESSION["oops"] = TRUE;
   header("location:register");

@@ -39,6 +39,9 @@ switch ($request) {
     case 'resend_verification' :
       require __DIR__ . '/controllers/resendver_controller.php';
       break;
+    case 'mail_sent' :
+      require __DIR__ . '/controllers/mailsent_controller.php';
+      break;
     default:
         http_response_code(404);
         require __DIR__ . '/views/404.php';
