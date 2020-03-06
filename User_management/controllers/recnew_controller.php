@@ -9,11 +9,16 @@ require_once("db/db.php");
 require_once("models/recnew_model.php");
 
 //Username control
+$_SESSION["w_username"] = FALSE;
+$_SESSION["w_password"] = FALSE;
+$_SESSION["w_email"] = FALSE;
+$_SESSION["oops"] = FALSE;
 
 if (isset($_POST["username"]) && !empty($_POST["username"])) {
   if (preg_match('/^([A-Za-z0-9_\-\.]){2,25}$/',$_POST["username"])) {
     $user = ($_POST["username"]);
   } else {
+    $_SESSION["w_username"] = TRUE;
     header("location:register");
     exit;
   }
@@ -28,11 +33,12 @@ if (isset($_POST["mail"]) && !empty($_POST["mail"])) {
   if (preg_match('/^[^@;]+@[A-Za-z0-9]+(\.[A-Za-z0-9]+)+$/',$_POST['mail'])) {
     $email = ($_POST["mail"]);
   } else {
+    $_SESSION["w_email"] = TRUE;
     header("location:register");
     exit;
   }
 } else {
-  header("location:index.php");
+  header("location:register");
   exit;
 }
 
@@ -43,7 +49,8 @@ $options = [
 if (isset($_POST["password"]) && !empty($_POST["password"])) {
   $pwd_hash = password_hash("{$_POST['password']}",PASSWORD_BCRYPT,$options);
 } else {
-  header("location:index.php");
+  $_SESSION["w_password"] = TRUE;
+  header("location:register");
   exit;
 }
 
@@ -166,13 +173,19 @@ EOT;
 	return $text;
 }
 
-sendMail($user,$email,$pwd_hash,$ver_hash);
-
-
-$create_user = new createuser();
-$error = $create_user->create_user($user,$pwd_hash,$email,$ver_hash,
-$creation_date);
-echo $error;
-//Llamada a la vista
-require_once("views/recnew_view.phtml");
+$mail = sendMail($user,$email,$pwd_hash,$ver_hash);
+if ($mail) {
+  $create_user = new createuser();
+  $error = $create_user->create_user($user,$pwd_hash,$email,$ver_hash,
+  $creation_date);
+  if ($error == 1062) {
+    $_SESSION["duplicate"] = TRUE;
+    header("location:register");
+    exit;
+  }
+} else {
+  $_SESSION["oops"] = TRUE;
+  header("location:register");
+  exit;
+}
 ?>

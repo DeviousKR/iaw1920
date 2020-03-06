@@ -2,7 +2,8 @@
 session_start();
 require_once("db/db.php");
 $_SESSION["w_name"] = FALSE;
-$_SESSION["W_pass"] = FALSE;
+$_SESSION["w_pass"] = FALSE;
+
 
   if (isset($_POST["username"]) && !(empty($_POST["username"]))) {
     $user = $_POST["username"];
