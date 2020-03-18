@@ -12,7 +12,7 @@ class validateuser{
         $ver_array= $query->fetch_assoc();
         return $ver_array;
     }
-    public function verifiy_user($user){
+    public function validate_user($user){
         $sql = "UPDATE users SET verification=1 WHERE username='$user'";
         $query = $this->db->query($sql);
         return $this->db->errno;

@@ -1,18 +1,18 @@
 <?php
 session_start();
-
 require 'PHPMailer-master/src/Exception.php';
 require 'PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer-master/src/SMTP.php';
-
 require_once("db/db.php");
-require_once("models/resendver_model.php");
+require_once("models/recovery_model.php");
 
-$_SESSION["w_username"] = FALSE;
-$_SESSION["w_password"] = FALSE;
-$_SESSION["w_email"] = FALSE;
-$_SESSION["oops"] = FALSE;
-$_SESSION["duplicate"] = FALSE;
+$val_e = "";
+$w_mail = "";
+if (isset($_GET['w_email'])) {
+  $val_e ="is-invalid";
+  $w_mail = "Sorry, this account is not verified, or doesn't exists if you need a new link to register, head
+  <a href=\"resend_verification\">here.</a> if you need to register <a href=\"register\">here.</a>";
+}
 
 // Import PHPMailer classes into the global namespace
 // These must be at the top of your script, not inside a function
@@ -22,13 +22,35 @@ use PHPMailer\PHPMailer\Exception;
 
 if (isset($_POST["mail"]) && !(empty($_POST["mail"]))) {
 
-
 $email = $_POST["mail"];
 $OOuser = new getuser();
 $user_array = $OOuser->get_user($email);
-$user = $user_array['username'];
-$pwd_hash = $user_array['pwd_hash'];
-$ver_hash = $user_array['ver_hash'];
+
+  if($user_array['verification']) {
+  $user = $user_array['username'];
+  $pwd_hash = $user_array['pwd_hash'];
+
+  //creates the challenge to be sent to the user.
+  function passwordHash($pwd_hash){
+	   return crypt($pwd_hash,'$5$rounds=5000$HaveANiceTrip!$');
+   }
+
+   function generateRandomString($pwd_hash, $length = 10) {
+	    $characters = passwordHash($pwd_hash);
+      $charactersLength = strlen($characters);
+	    $randomString = '';
+	    for ($i = 0; $i < $length; $i++) {
+		      $randomString .= $characters[rand(0, $charactersLength - 1)];
+	    }
+	    return $randomString;
+    }
+
+    function setChallenge($pwd_hash){
+	     $challenge = base64_encode(generateRandomString($pwd_hash));
+       return $challenge;
+    }
+
+    $ver_hash = setChallenge($pwd_hash);
 
 // Instantiation and passing `true` enables exceptions
 function sendMail($user,$email,$pwd_hash,$ver_hash) {
@@ -74,7 +96,7 @@ function sendMail($user,$email,$pwd_hash,$ver_hash) {
 
 
 function mailBody($user, $email,$pwd_hash,$ver_hash) {
-	$href = '172.16.10.11/iaw1920/User_management/register_confirmed'.'?username='.base64_encode($user).'&challenge='.$ver_hash;
+	$href = '172.16.10.11/iaw1920/User_management/new_password'.'?username='.base64_encode($user).'&challenge='.$ver_hash;
 	// Debug
 	// file_put_contents('./debug/mail.css', $styles);
 	// End Debug
@@ -91,7 +113,7 @@ function mailBody($user, $email,$pwd_hash,$ver_hash) {
 		  	<body>
 		    	<div class="jumbotron">
 					<h1 class="display-4">You Track the World</h1>
-					<p class="lead">This is the only data that we are going to store from you. Keep this email just in case you forget your username.
+					<p class="lead">This is the information from the account that you have solicited a recovery:
 					</p>
 					<table class="table" style="background-color: white">
 				      <tbody>
@@ -104,7 +126,7 @@ function mailBody($user, $email,$pwd_hash,$ver_hash) {
 				      </tbody>
 				    </table>
 					<hr class="my-4">
-					<p>Please, click the button to confirm your account. Then proceed to the login page and that's it!</p>
+					<p>Please, click the link to select a new password for your account, if you haven't asked for an account recovery, ignore this mail </p>
 					<p class="lead">
 					    <a href="$href">Confirm Account</a>
 					</p>
@@ -118,15 +140,21 @@ EOT;
 $mail = sendMail($user,$email,$pwd_hash,$ver_hash);
 
 if ($mail) {
-  header("location:mail_sent");
-} else {
-  $_SESSION["oops"] = TRUE;
-  header("location:register");
-  exit;
+  $update_user = new getuser();
+  $result = $update_user->update_user($ver_hash,$email);
+    if ($result) {
+      header("location:mail_sent");
+      exit;
+    } else {
+      header("location:recovery?w_email=1");
+    }
+  }
+
+  } else {
+      header("location:recovery?w_email=TRUE");
+  }
 }
 
-
-}
 //Llamada a la vista
-require_once("views/resendver_view.phtml");
+require_once("views/recovery_view.phtml");
 ?>

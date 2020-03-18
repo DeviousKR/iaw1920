@@ -14,7 +14,6 @@ $request = isset($matches[1]) ? $matches[1][0] : $request;
 
 switch ($request) {
     case CONTEXT_URL:
-    //pagina de login
     case '':
     case 'landing' :
         require __DIR__ . '/controllers/landing_controller.php';
@@ -25,11 +24,9 @@ switch ($request) {
     case 'login_v' :
       require __DIR__ . '/controllers/logsucc_controller.php';
       break;
-    //formulario para registrarse
     case 'register' :
       require __DIR__ . '/controllers/formreg_controller.php';
       break;
-    //tratado de los datos de registro i correo.
     case 'register_confirmation' :
       require __DIR__ . '/controllers/recnew_controller.php';
       break;
@@ -41,6 +38,15 @@ switch ($request) {
       break;
     case 'mail_sent' :
       require __DIR__ . '/controllers/mailsent_controller.php';
+      break;
+    case 'recovery' :
+      require __DIR__ . '/controllers/recovery_controller.php';
+      break;
+    case 'new_password' :
+      require __DIR__ . '/controllers/new_password_controller.php';
+      break;
+    case 'set_password' :
+      require __DIR__ . '/controllers/set_password_controller.php';
       break;
     default:
         http_response_code(404);

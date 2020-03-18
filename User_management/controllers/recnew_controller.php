@@ -13,6 +13,7 @@ $_SESSION["w_username"] = FALSE;
 $_SESSION["w_password"] = FALSE;
 $_SESSION["w_email"] = FALSE;
 $_SESSION["oops"] = FALSE;
+$_SESSION["duplicate"] = FALSE;
 
 if (isset($_POST["username"]) && !empty($_POST["username"])) {
   if (preg_match('/^([A-Za-z0-9_\-\.]){2,25}$/',$_POST["username"])) {
@@ -108,7 +109,7 @@ function sendMail($user,$email,$pwd_hash,$ver_hash) {
 	//$mail->addReplyTo('replyto@example.com', 'First Last');
 	$mail->addAddress($email);
 	$mail->Subject = 'Confirm account for '.$user;
-	$mail->msgHTML(mailBody($user, $email, $pwd_hash,$ver_hash));
+	$mail->msgHTML(mailBody($user, $email,$pwd_hash,$ver_hash));
 	//$mail->msgHTML('<b>Hola</b>');
 	$mail->AltBody = 'Please, copy the url into a browser to confirm your account';
 	//$mail->addAttachment('images/phpmailer_mini.png');
@@ -131,7 +132,7 @@ function sendMail($user,$email,$pwd_hash,$ver_hash) {
 
 
 
-function mailBody($user, $email, $pwd_hash,$ver_hash) {
+function mailBody($user, $email,$pwd_hash,$ver_hash) {
 	$href = '172.16.10.11/iaw1920/User_management/register_confirmed'.'?username='.base64_encode($user).'&challenge='.$ver_hash;
 	// Debug
 	// file_put_contents('./debug/mail.css', $styles);

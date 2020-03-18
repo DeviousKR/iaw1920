@@ -9,7 +9,7 @@ require_once("models/recver_model.php");
 if (isset($_GET['username'])) {
   $username = base64_decode($_GET['username']);
 } else {
-  header("location:resend_verification");
+  header("location:recovery");
   exit;
 }
 
@@ -17,7 +17,7 @@ if (isset($_GET['username'])) {
 if (isset($_GET['challenge'])) {
   $ver_hash = $_GET['challenge'];
 } else {
-  header("location:resend_verification");
+  header("location:recovery");
   exit;
 }
 
@@ -44,12 +44,10 @@ $check_date = $date->format('Y-m-d H:i:s');
 
 //verifiying that the time is less than 1 hour before the registry
 if ($creation_date >= $check_date) {
-  $verify_user = new validateuser();
-  $v_error = $verify_user->validate_user($username);
-  header("location:landing");
+  $_SESSION['userver'] = $username;
+  header("location:set_password");
 } else {
-  header("location:resend_verification");
+  header("location:recovery");
   exit;
 }
-
 ?>

@@ -8,6 +8,7 @@ $w_pass = "";
 $w_mail = "";
 $oops = "";
 $duplicate = "";
+
 if (isset($_SESSION["w_password"]) && ($_SESSION["w_password"] == TRUE)) {
   $val_p ="is-invalid";
   $w_pass = "Sorry, this is not a valid password";
@@ -24,7 +25,8 @@ if (isset($_SESSION["w_email"]) && ($_SESSION["w_email"] == TRUE)) {
 }
 
 if (isset($_SESSION["oops"]) && ($_SESSION["oops"] == TRUE)) {
-  $oops = "Sorry, something went wrong, please try again in a few minutes";
+  $oops = "Sorry, something went wrong, please try again in a few minutes or register
+  with us if you haven't before.";
 }
 
 if (isset($_SESSION["duplicate"]) && ($_SESSION["duplicate"] == TRUE)) {
