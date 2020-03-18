@@ -48,6 +48,15 @@ switch ($request) {
     case 'set_password' :
       require __DIR__ . '/controllers/set_password_controller.php';
       break;
+    case 'logoff' :
+        require __DIR__ . '/controllers/log_off_controller.php';
+        break;
+    case 'delete' :
+        require __DIR__ . '/controllers/delete_controller.php';
+        break;
+    case 'upload' :
+        require __DIR__ . '/controllers/upload_controller.php';
+        break;
     default:
         http_response_code(404);
         require __DIR__ . '/views/404.php';

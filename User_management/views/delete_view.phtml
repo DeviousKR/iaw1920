@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Account deletion.</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+      body {
+        background-color: #000000;
+        font-family:"Trebuchet MS", Helvetica, sans-serif'
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron mt-4 bg-secondary text-white text-center">
+        <h1 class="display-5 tet-center font-weight-bold">Are you sure you want to delete your account?</h1>
+          <p class="lead mt-4">Click yes to erase your account, and all the images attached to it
+          if you got here by accident, please press no to return to the landing page</p>
+          <form action="delete" method="POST">
+            <button type="submit" class="btn btn-success btn-lrg" name="query" value="no" >No! Take me back.</button>
+            <button type="submit" class="btn btn-danger btn-lrg" name="query" value="yes">Yes, I want to delete my account :C</button>
+          </form>
+      </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/popper.js/dist/popper.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -6,4 +6,34 @@ class Connect{
         return $mysqli;
     }
 }
+
+/* Script for the creation of the database:
+
+Create DATABASE IF NOT EXISTS accounts;
+USE accounts;
+
+DROP TABLE IF EXISTS users;
+Create table users (
+	mail VARCHAR(100) NOT NULL,
+    username VARCHAR(25) NOT NULL UNIQUE,
+    pwd_hash VARCHAR(60) NOT NULL,
+    ver_hash VARCHAR(60) NOT NULL UNIQUE,
+	  verification BOOLEAN NOT NULL,
+    creation_date DATETIME NOT NULL
+);
+
+ALTER TABLE users ADD CONSTRAINT pk_mail PRIMARY KEY(mail);
+
+DROP TABLE IF EXISTS files;
+CREATE TABLE files (
+	username VARCHAR(25),
+  file_add VARCHAR(500)
+);
+
+ALTER TABLE files ADD CONSTRAINT pk_username PRIMARY KEY(username);
+ALTER TABLE files ADD CONSTRAINT fk_username FOREIGN KEY(username) REFERENCES users(username);
+#DATETIME FORMAT: YYYY-MM-DD h:i:s
+
+*/
+
 ?>

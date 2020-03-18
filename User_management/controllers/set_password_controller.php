@@ -25,7 +25,6 @@ if (isset($_POST["pwd"]) && !(empty($_POST["pwd"]))) {
       ];
       $pwd_hash = password_hash("{$_POST['pwd']}",PASSWORD_BCRYPT,$options);
       $new_pass = new updatepwd();
-      echo $username,$pwd_hash;
       $result = $new_pass->update_password($username,$pwd_hash);
       $_SESSION["user"] = $username;
       header("location:landing");

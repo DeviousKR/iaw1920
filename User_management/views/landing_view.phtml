@@ -36,16 +36,16 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="">**USERNAME**</a>
+            <?=$user?>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="login">**LOG**</a>
+            <?=$log?>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="register">**REGISTER**</a>
+            <a class="nav-link" href="https://twitter.com/KrosanTenshi/">Contact us!</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="https://blog.getbootstrap.com/">**RESERVED**</a>
+            <?=$delete?>
           </li>
         </ul>
       </div>
@@ -54,40 +54,35 @@
   <div class="container mt-4">
   <div class="row">
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link?>">
         <img  src="https://i.ytimg.com/vi/wCZ5TJCBWMg/maxresdefault.jpg" class="zoom img-fluid "  alt="">
-      </a>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link1?>">
         <img  src="https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2018/04/CGWd8yk-796x398.jpg" class="zoom img-fluid"  alt="">
-      </a>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link2?>">
         <img  src="https://hackernoon.com/drafts/q141s3xfs.png" class="zoom img-fluid " alt="">
-      </a>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link3?>">
         <img  src="https://cdn.freebiesupply.com/logos/thumbs/2x/java-logo.png" class="zoom img-fluid "  alt="">
-      </a>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link4?>">
         <img  src="https://engineering.fb.com/wp-content/uploads/2015/06/1522635669452_11.jpg" class="zoom img-fluid "  alt="">
-      </a>
     </div>
     <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-      <a href="spy.php?link=<?=$link5?>">
         <img  src="https://cdn.lynda.com/course/139988/139988-637021525148800194-16x9.jpg" class="zoom img-fluid "  alt="">
-      </a>
     </div>
   </div>
 
   </div>
+  <form action="upload" method="post" enctype="multipart/form-data">
+      Select image to upload:
+      <input type="file" name="fileToUpload" id="fileToUpload">
+      <input type="submit" class="btn btn-success btn-lrg" value="Upload Image" name="submit">
+  </form>
+    <?=$res?>
 </div>
 </div>
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
